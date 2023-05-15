@@ -1,0 +1,33 @@
+# EnderUtils by Needev
+# Arquivo de configuração
+
+AlwaysDay:
+  enable: true
+  worlds:
+    - 'Mundo'
+
+JoinMessage:
+  enable: true
+  message:
+    - ""
+    - "<center>&#9a1ffb&lE&#af23fc&ln&#c327fc&ld&#d82bfd&le&#ec2ffd&lr&f&lCraft"
+    - "<center>&7Seja bem-vindo ao &nservidor&7."
+    - ""
+    - " &#FDF300&l➜ &7No momento temos &#FDF300<players> jogadores &7online."
+    - " &#FDF300&l➜ &7Use &#FDF300/discord &7para vincular sua conta ao Discord."
+    - " &#FDF300&l➜ &7Use &#FDF300/2fa email &7para adicionar um email de recuperação."
+    - "<center>&#fb00f1&lD&#fb18d9&li&#fb31c1&lv&#fc49a9&li&#fc6191&lr&#fc7a79&lt&#fc9260&la&#fcaa48&l-&#fdc230&ls&#fddb18&le&#fdf300&l!"
+    - ""
+
+
+# WORKING...
+# Sistema de venda de itens através do PIX
+ComprarPix:
+  # ativar ou desativar o sistema
+  ativar: true
+  # Token de acesso da lojasquare
+  token: ""
+  # Cadastre os produtos que serão vendidos (comando para acessar /comprarpix (nome do produto)
+  produtos:
+    #formato = "NOMEPRODUTO-IDPRODUTOLOJASQUARE"
+    - "TESTE-1234"
