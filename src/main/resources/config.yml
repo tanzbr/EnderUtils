@@ -1,4 +1,4 @@
-# EnderUtils by Needev
+# EnderUtils by Ferlux
 # Arquivo de configuração
 
 AlwaysDay:
@@ -6,7 +6,12 @@ AlwaysDay:
   worlds:
     - 'Mundo'
 
+## PLACEHOLDERS: <players> <center>
 JoinMessage:
+  # Mensagem para todos quando o jogador entrar pela primeira vez
+  enableFirstMessage: true
+  messageFirst: "&6Seja bem-vindo(a) &e<player> &6pela primeira vez no servidor!"
+  # Mensagem enviada ao jogador toda vez ao entrar
   enable: true
   message:
     - ""
@@ -19,15 +24,13 @@ JoinMessage:
     - "<center>&#fb00f1&lD&#fb18d9&li&#fb31c1&lv&#fc49a9&li&#fc6191&lr&#fc7a79&lt&#fc9260&la&#fcaa48&l-&#fdc230&ls&#fddb18&le&#fdf300&l!"
     - ""
 
-
-# WORKING...
-# Sistema de venda de itens através do PIX
-ComprarPix:
-  # ativar ou desativar o sistema
-  ativar: true
-  # Token de acesso da lojasquare
-  token: ""
-  # Cadastre os produtos que serão vendidos (comando para acessar /comprarpix (nome do produto)
-  produtos:
-    #formato = "NOMEPRODUTO-IDPRODUTOLOJASQUARE"
-    - "TESTE-1234"
+Protector:
+  # bypass permission: enderutils.protector.bypass
+  enable: true
+  # enable-disable block of hidden syntax on chat and tab complete. example: /minecraft:give
+  blockHiddenSyntax: true
+  errorMessage: '&c&lERRO ➜ &fComando não encontrado.'
+  # block commands below
+  blockedCommands:
+    - 'pl'
+    - 'plugins'

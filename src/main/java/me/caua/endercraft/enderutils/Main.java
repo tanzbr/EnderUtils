@@ -2,6 +2,7 @@ package me.caua.endercraft.enderutils;
 
 import me.caua.endercraft.enderutils.listeners.PlayerJoinMessage;
 import me.caua.endercraft.enderutils.utils.AlwaysDay;
+import me.caua.endercraft.enderutils.utils.BlockHiddenSyntax;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,9 +36,11 @@ public class Main extends JavaPlugin {
     }
     public void registerEvents() {
         // register player join event for join message
-        if (getConfig().getBoolean("JoinMessage.enable")) {
-            Bukkit.getConsoleSender().sendMessage("§b[EnderUtils] §fAtivando PlayerJoinMessage.");
-            Bukkit.getPluginManager().registerEvents(new PlayerJoinMessage(), this);
+        Bukkit.getConsoleSender().sendMessage("§b[EnderUtils] §aAtivando PlayerJoinMessage.");
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinMessage(), this);
+        if (getConfig().getBoolean("Protector.enable")) {
+            Bukkit.getConsoleSender().sendMessage("§b[EnderUtils] §aAtivando Protector.");
+            Bukkit.getPluginManager().registerEvents(new BlockHiddenSyntax(), this);
         }
     }
 

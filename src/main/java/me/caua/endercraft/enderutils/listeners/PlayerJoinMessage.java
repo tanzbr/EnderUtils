@@ -2,6 +2,8 @@ package me.caua.endercraft.enderutils.listeners;
 
 import me.caua.endercraft.enderutils.Main;
 import me.caua.endercraft.enderutils.utils.ColorTranslate;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -15,20 +17,37 @@ import java.util.List;
 public class PlayerJoinMessage implements Listener {
 
     private List<String> message;
+    private String messageFirst;
+    private boolean sendFirstMessage;
+    private boolean sendJoinMessage;
 
     public PlayerJoinMessage() {
         message = Main.getInstance().getConfig().getStringList("JoinMessage.message");
+        messageFirst = Main.getInstance().getConfig().getString("JoinMessage.messageFirst");
+        sendJoinMessage = Main.getInstance().getConfig().getBoolean("JoinMessage.enable");
+        sendFirstMessage = Main.getInstance().getConfig().getBoolean("JoinMessage.enableFirstMessage");
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         e.joinMessage(null);
-        for (String messagem : message) {
-            if (messagem.contains("<center>")) {
-                p.sendMessage(centerText(ColorTranslate.chatColors(messagem).replaceAll("<center>", "").replaceAll("<players>", String.valueOf(Bukkit.getOnlinePlayers().size()))));
-            } else {
-                p.sendMessage(ColorTranslate.chatColors(messagem).replaceAll("<players>", String.valueOf(Bukkit.getOnlinePlayers().size())));
+        if (sendFirstMessage) {
+            if (!p.hasPlayedBefore()) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    player.sendMessage("");
+                    player.sendMessage(ColorTranslate.chatColors(messageFirst).replaceAll("<player>", p.getName()));
+                    player.sendMessage("");
+                }
+            }
+        }
+        if (sendJoinMessage) {
+            for (String messagem : message) {
+                if (messagem.contains("<center>")) {
+                    p.sendMessage(centerText(ColorTranslate.chatColors(messagem).replaceAll("<center>", "").replaceAll("<players>", String.valueOf(Bukkit.getOnlinePlayers().size()))));
+                } else {
+                    p.sendMessage(ColorTranslate.chatColors(messagem).replaceAll("<players>", String.valueOf(Bukkit.getOnlinePlayers().size())));
+                }
             }
         }
     }
