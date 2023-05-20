@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerCommandSendEvent;
 import org.bukkit.event.server.TabCompleteEvent;
 
 import java.util.ArrayList;
@@ -16,22 +17,13 @@ public class BlockHiddenSyntax implements Listener {
     private final List<String> blockedCmds = Main.getInstance().getConfig().getStringList("Protector.blockedCommands");
     private final String errorMessage = Main.getInstance().getConfig().getString("Protector.errorMessage");
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onTabComplete(TabCompleteEvent e) {
-        if (e.isCancelled()) return;
-        if (e.getSender().hasPermission("enderutils.protector.bypass")) return;
 
+    // need fix
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onCommandSend(PlayerCommandSendEvent e) {
+        if (e.getPlayer().hasPermission("enderutils.protector.bypass")) return;
         if (blockHidden) {
-            List<String> newCompletions = e.getCompletions();
-            for (String cmd : e.getCompletions()) {
-                if (!cmd.contains(":")) {
-                    newCompletions.remove(cmd);
-                }
-                if (blockedCmds.contains(cmd)) {
-                    newCompletions.remove(cmd);
-                }
-            }
-            e.setCompletions(newCompletions);
+            e.getCommands().removeIf((string) -> string.contains(":") || blockedCmds.contains(string));
         }
     }
 
