@@ -23,8 +23,9 @@ public class BlockHiddenSyntax implements Listener {
     public void onCommandSend(PlayerCommandSendEvent e) {
         if (e.getPlayer().hasPermission("enderutils.protector.bypass")) return;
         if (blockHidden) {
-            e.getCommands().removeIf((string) -> string.contains(":") || blockedCmds.contains(string));
+            e.getCommands().removeIf((string) -> string.contains(":"));
         }
+        e.getCommands().removeIf(blockedCmds::contains);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
