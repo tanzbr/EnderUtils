@@ -5,11 +5,19 @@ import me.caua.endercraft.enderutils.utils.AlwaysDay;
 import me.caua.endercraft.enderutils.utils.BlockHiddenSyntax;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
+
+import java.util.List;
+import java.util.logging.Filter;
+import java.util.logging.LogRecord;
 
 public class Main extends JavaPlugin {
 
     private static Main instance;
     private static AlwaysDay alwaysDay;
+    private List<String> logFilters;
+    private BukkitTask filterexec;
 
     public void onEnable() {
         instance = this;
@@ -21,6 +29,11 @@ public class Main extends JavaPlugin {
         if (getConfig().getConfigurationSection("AlwaysDay").getBoolean("enable")) {
             Bukkit.getConsoleSender().sendMessage("§b[EnderUtils] §aAtivando AlwaysDay.");
             alwaysDay = new AlwaysDay();
+        }
+
+        // Enable log filters
+        if (getConfig().getBoolean("Utils.logFilterEnable")) {
+            filterExec();
         }
 
         Bukkit.getConsoleSender().sendMessage("§b[EnderUtils] §fPlugin iniciado com sucesso.");
@@ -47,6 +60,28 @@ public class Main extends JavaPlugin {
     private void loadConfig(){
         getConfig().options().copyDefaults(false);
         saveDefaultConfig();
+    }
+
+    public void filterExec() {
+        filterexec = new BukkitRunnable() {
+            @Override
+            public void run() {
+                Bukkit.getConsoleSender().sendMessage("§b[EnderUtils] §aAplicando filtros de logs.");
+                logFilters = getConfig().getStringList("Utils.logFilters");
+                Filter f = new Filter(){
+                    public boolean isLoggable(LogRecord line) {
+                        return !(logFilters.contains(line.getMessage()));
+                    }
+                    public String doFilter(String arg0) {
+                        return null;
+                    }
+                    public String doFilterUrl(String arg0) {
+                        return null;
+                    }};
+                getServer().getLogger().setFilter(f);
+                this.cancel();
+            }
+        }.runTaskTimerAsynchronously(instance, 1200, 1200);
     }
 
     public static Main getInstance() {

@@ -24,6 +24,13 @@ JoinMessage:
     - "<center>&#fb00f1&lD&#fb18d9&li&#fb31c1&lv&#fc49a9&li&#fc6191&lr&#fc7a79&lt&#fc9260&la&#fcaa48&l-&#fdc230&ls&#fddb18&le&#fdf300&l!"
     - ""
 
+Utils:
+  # enable/disable log filter, this is useful to suppress warnings from plugins that just spam console and do not cause any several error
+  logFilterEnable: true
+  # logs that contains the words below will not be visible in the console/logs
+  logFilters:
+    - 'UmFiltroAqui'
+
 Protector:
   # bypass permission: enderutils.protector.bypass.*
   enable: true
