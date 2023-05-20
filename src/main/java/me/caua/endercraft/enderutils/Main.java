@@ -70,7 +70,12 @@ public class Main extends JavaPlugin {
                 logFilters = getConfig().getStringList("Utils.logFilters");
                 Filter f = new Filter(){
                     public boolean isLoggable(LogRecord line) {
-                        return !(logFilters.contains(line.getMessage()));
+                        for (String filter : logFilters) {
+                            if (line.getMessage().contains(filter)) {
+                                return false;
+                            }
+                        }
+                        return false;
                     }
                     public String doFilter(String arg0) {
                         return null;
