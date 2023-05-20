@@ -2,6 +2,7 @@ package me.caua.endercraft.enderutils.utils;
 
 import me.caua.endercraft.enderutils.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommandYamlParser;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -50,6 +51,7 @@ public class BlockHiddenSyntax implements Listener {
     public void onCommandPreprocess(PlayerCommandPreprocessEvent e) {
         if (e.isCancelled()) return;
         if (e.getPlayer().hasPermission("enderutils.protector.bypass.*")) return;
+        if (e.getPlayer().hasPermission("enderutils.protector.bypass.cmds")) return;
         if (blockedCmds.size() == 0 && !blockHidden) return;
 
         String cmd = e.getMessage().split(" ")[0].replaceAll("/", "");
