@@ -25,6 +25,13 @@ JoinMessage:
     - ""
 
 Utils:
+  # this option execute the commands in the list when a bedrock player (floodgate) joins the server
+  floodgateJoinCmds:
+    enable: true
+    # %player% for nick
+    # put ;firstjoin on the end of the command to execute only on first join
+    commands:
+      - ''
   # enable/disable log filter, this is useful to suppress warnings from plugins that just spam console and do not cause any several error
   logFilterEnable: true
   # logs that contains the words below will not be visible in the console/logs

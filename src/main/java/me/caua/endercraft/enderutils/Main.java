@@ -3,6 +3,7 @@ package me.caua.endercraft.enderutils;
 import me.caua.endercraft.enderutils.listeners.PlayerJoinMessage;
 import me.caua.endercraft.enderutils.utils.AlwaysDay;
 import me.caua.endercraft.enderutils.utils.BlockHiddenSyntax;
+import me.caua.endercraft.enderutils.utils.ExecuteFloodgateCmds;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -54,6 +55,14 @@ public class Main extends JavaPlugin {
         if (getConfig().getBoolean("Protector.enable")) {
             Bukkit.getConsoleSender().sendMessage("§b[EnderUtils] §aAtivando Protector.");
             Bukkit.getPluginManager().registerEvents(new BlockHiddenSyntax(), this);
+        }
+        if (getConfig().getBoolean("Utils.floodgateJoinCmds.enable")) {
+            if (Bukkit.getPluginManager().getPlugin("Floodgate") != null) {
+                Bukkit.getConsoleSender().sendMessage("§b[EnderUtils] §aAtivando Floodgate Commands.");
+                Bukkit.getPluginManager().registerEvents(new ExecuteFloodgateCmds(), this);
+            } else {
+                Bukkit.getConsoleSender().sendMessage("§b[EnderUtils] §cFloodgate não encontrado.");
+            }
         }
     }
 
