@@ -58,12 +58,12 @@ public class BlockHiddenSyntax implements Listener {
         if (blockHidden) {
             if (cmd.contains(":")) {
                 e.setCancelled(true);
-                e.getPlayer().sendMessage(ColorTranslate.chatColors(errorMessage));
+                e.getPlayer().sendMessage(ColorTranslate.chatColors(e.getPlayer(), errorMessage));
             }
         }
         if (blockedCmds.contains(cmd)) {
             e.setCancelled(true);
-            e.getPlayer().sendMessage(ColorTranslate.chatColors(errorMessage));
+            e.getPlayer().sendMessage(ColorTranslate.chatColors(e.getPlayer(), errorMessage));
         } else {
             for (String blockedCmd : blockedCmds) {
                 if (!cmd.equals(blockedCmd)) {
@@ -74,7 +74,7 @@ public class BlockHiddenSyntax implements Listener {
                                 String group = splitted.get(1);
                                 if (!e.getPlayer().hasPermission("enderutils.protector.group." + group)) {
                                     e.setCancelled(true);
-                                    e.getPlayer().sendMessage(ColorTranslate.chatColors(errorMessage));
+                                    e.getPlayer().sendMessage(ColorTranslate.chatColors(e.getPlayer(), errorMessage));
                                 }
                             }
                         }

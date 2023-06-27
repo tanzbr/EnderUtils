@@ -36,7 +36,7 @@ public class PlayerJoinMessage implements Listener {
             if (!p.hasPlayedBefore()) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     player.sendMessage("");
-                    player.sendMessage(ColorTranslate.chatColors(messageFirst).replaceAll("<player>", p.getName()));
+                    player.sendMessage(ColorTranslate.chatColors(p, messageFirst).replaceAll("<player>", p.getName()));
                     player.sendMessage("");
                 }
             }
@@ -44,9 +44,9 @@ public class PlayerJoinMessage implements Listener {
         if (sendJoinMessage) {
             for (String messagem : message) {
                 if (messagem.contains("<center>")) {
-                    p.sendMessage(centerText(ColorTranslate.chatColors(messagem).replaceAll("<center>", "").replaceAll("<players>", String.valueOf(Bukkit.getOnlinePlayers().size()))));
+                    p.sendMessage(centerText(ColorTranslate.chatColors(p, messagem).replaceAll("<center>", "").replaceAll("<players>", String.valueOf(Bukkit.getOnlinePlayers().size()))));
                 } else {
-                    p.sendMessage(ColorTranslate.chatColors(messagem).replaceAll("<players>", String.valueOf(Bukkit.getOnlinePlayers().size())));
+                    p.sendMessage(ColorTranslate.chatColors(p, messagem).replaceAll("<players>", String.valueOf(Bukkit.getOnlinePlayers().size())));
                 }
             }
         }

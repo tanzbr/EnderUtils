@@ -5,3 +5,4 @@ version: 1.0
 main: me.caua.endercraft.enderutils.Main
 softdepend:
   - floodgate
+  - PlaceholderAPI
